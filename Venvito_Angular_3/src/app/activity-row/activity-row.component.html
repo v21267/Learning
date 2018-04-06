@@ -1,0 +1,64 @@
+<ng-template [ngIf]="data.type == 'COUNT'">
+  <td [style.background-color]=data.color class="activity-badge"></td>
+  <td class="activity-count">
+    {{ data.value }}
+  </td>
+  <td class="activity-description">
+    {{ data.description }}
+  </td>
+  <td class="activity-button">
+    <button type="button" class="icon-button full-size" (click)="updateCount(-1)" [disabled]="data.value <= 0">
+      <span class="fas fa-minus fa-lg"></span>
+    </button>
+  </td>
+  <td class="activity-button">
+    <button type="button" class="icon-button full-size" (click)="updateCount(1)">
+      <span class="fas fa-plus fa-lg"></span>
+    </button>
+  </td>
+</ng-template>
+
+<ng-template [ngIf]="data.type == 'AMOUNT'">
+  <td [style.background-color]=data.color class="activity-badge activity-amount"></td>
+  <td colspan="2" class="activity-amount">
+    <div class="activity-amount-description">
+      {{ data.description }}
+    </div>
+    <ng-template [ngIf]="!this.inAmountEditing">
+      <div class="activity-amount">
+        {{ data.value | currency:'USD':'symbol':'1.0-0'  }}
+      </div>
+    </ng-template>
+    <ng-template [ngIf]="this.inAmountEditing">
+      <div class="activity-amount">
+        $
+        <input name="amount"
+                id="amount"
+                #amount="ngModel"
+                matInput type="number"
+                [(ngModel)]="data.value"
+                min="0" max="999999999"
+                required>
+      </div>
+    </ng-template>
+  </td>
+  <ng-template [ngIf]="!this.inAmountEditing">
+    <td class="activity-amount-button" colspan="2">
+      <button type="button" class="icon-button full-size" (click)="editAmount()">
+        <span>EDIT</span>
+      </button>
+    </td>
+  </ng-template>
+  <ng-template [ngIf]="this.inAmountEditing">
+    <td class="activity-button">
+      <button type="button" class="icon-button full-size" (click)="cancelAmountEditing()" style="color: red;">
+        <span class="fas fa-remove fa-lg"></span>
+      </button>
+    </td>
+    <td class="activity-button">
+      <button type="button" class="icon-button full-size" (click)="setAmount()" [disabled]="!isValidAmount" [style.color]=saveAmountButonColor >
+        <span class="fas fa-check fa-lg"></span>
+      </button>
+    </td>
+  </ng-template>
+</ng-template>

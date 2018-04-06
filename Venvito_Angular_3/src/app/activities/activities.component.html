@@ -1,0 +1,8 @@
+<p *ngIf="!metricsData"><em>Loading...</em></p>
+
+<table class='table pt-0 activities-table' *ngIf="metricsData">
+  <tbody>
+    <tr *ngFor="let data of metricsData" app-activity-row [data]="data" class="activity-row">
+    </tr>
+  </tbody>
+</table>

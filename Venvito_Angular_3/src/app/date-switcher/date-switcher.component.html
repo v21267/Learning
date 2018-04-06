@@ -1,0 +1,33 @@
+<div class="pt-3 pb-3 container w-100 pl-0 pr-0 date-switcher">
+  <div class="row ml-0 mr-0">
+
+    <div class="col-2 pl-0 mr-0 text-left">
+      <button type="button" class="icon-button" (click)="shiftDate(-1)">
+        <span class="fas fa-caret-left fa-2x"></span>
+      </button>
+    </div>
+
+    <div class="col-8 centered">
+      <input matInput [matDatepicker]="picker"
+             [(ngModel)]="calendarDate"
+             (ngModelChange)="setCalendarDate($event)"
+             [max]="today"
+             style="opacity: 0; width: 0;">
+      <mat-datepicker #picker></mat-datepicker>
+
+      <a href="#" (click)="picker.open()" class="text-link current-date">
+        {{ currentDateCaption }}
+      </a>
+      <!--
+        <input name="dp" [(ngModel)]="calendarDate" (ngModelChange)="alert($event)" ngbDatepicker #d="ngbDatepicker" style="opacity: 0; width: 0;">
+  -->
+    </div>
+
+    <div class="col-2 pr-0 mr-0 text-right">
+      <button type="button" class="icon-button" (click)="shiftDate(1)" [disabled]="isToday">
+        <span class="fas fa-caret-right fa-2x"></span>
+      </button>
+    </div>
+
+  </div>
+</div>
