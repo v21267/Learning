@@ -13,7 +13,7 @@ export class ActivityRowComponent implements OnInit
   private inAmountEditing: boolean = false;
   private originalAmount: number;
 
-  @Input() data: MetricsData;
+  @Input() public data: MetricsData;
 
   constructor(private venvitoService: VenvitoService) { }
 
