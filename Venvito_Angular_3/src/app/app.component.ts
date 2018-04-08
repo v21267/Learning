@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VenvitoService } from './venvito.service';
 import { AppTitleComponent } from './app-title/app-title.component';
-import { DateSwitcherComponent } from './date-switcher/date-switcher.component';
-import { ActivitiesComponent } from './activities/activities.component';
 
 @Component({
   selector: 'app-root',

@@ -1,4 +1,19 @@
-<div class="app-title mb-0 mt-2">
-  <img src="/assets/img/Header.png" alt="Venvito" />
-</div>
+<nav class="navbar navbar-expand navbar-dark">
+  <span class="navbar-brand">
+    <img src="/assets/img/Header.png" alt="Venvito" />
+  </span>
+
+  <div class="separator">&nbsp;</div>
+
+  <div class="main-menu">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" [routerLinkActive]="['link-active']">
+        <a class="nav-link" [routerLink]="['/actvities']">Activities</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 

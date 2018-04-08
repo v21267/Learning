@@ -1,6 +1,22 @@
-.app-title
+nav.navbar
 {
   background-color: #009ddf;
+  margin-top: 10px;
+}
+
+ul.navbar-nav
+{
+  display: inline-flex;
   width: 100%;
-  text-align: center;
+}
+
+div.main-menu
+{
+  text-align: right;
+  width: calc(100% - 250px);
+}
+
+div.separator
+{
+  width: 50px;
 }

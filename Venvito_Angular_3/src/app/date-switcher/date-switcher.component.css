@@ -8,3 +8,8 @@ div.date-switcher
   background: linear-gradient(#d8d8d8, #ebf5fb);
   /* lightsteelblue */
 }
+
+button.date-switcher-button
+{
+  width: 40px;
+}

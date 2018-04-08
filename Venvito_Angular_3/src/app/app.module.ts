@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import
@@ -51,6 +52,7 @@ import { VenvitoService } from './venvito.service';
 import { DateSwitcherComponent } from './date-switcher/date-switcher.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityRowComponent } from './activity-row/activity-row.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { ActivityRowComponent } from './activity-row/activity-row.component';
     AppTitleComponent,
     DateSwitcherComponent,
     ActivitiesComponent,
-    ActivityRowComponent
+    ActivityRowComponent,
+    DashboardComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -67,7 +70,14 @@ import { ActivityRowComponent } from './activity-row/activity-row.component';
     HttpModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'activities', pathMatch: 'full' },
+      { path: 'activities', component: ActivitiesComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: '**', redirectTo: 'activities' }
+    ])
+
   ],
   providers: [VenvitoService],
   bootstrap: [AppComponent]
