@@ -7,11 +7,17 @@
 
   <div class="main-menu">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active" [routerLinkActive]="['link-active']">
-        <a class="nav-link" [routerLink]="['/actvities']">Activities</a>
-      </li>
       <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
+        <a class="nav-link" [routerLink]="['/activities']"  >
+          <span class="fas fa-tty fa-lg"></span>
+          Activities
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']" >
+        <a class="nav-link" [routerLink]="['/dashboard']">
+          <span class="fas fa-bar-chart fa-lg"></span>
+          Dashboard
+        </a>
       </li>
     </ul>
   </div>

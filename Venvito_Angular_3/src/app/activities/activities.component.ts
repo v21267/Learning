@@ -3,8 +3,7 @@ import { MetricsData } from '../metrics-data';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { VenvitoService } from '../venvito.service';
-import { DateSwitcherComponent } from './date-switcher/date-switcher.component';
-import { ActivitiesComponent } from './activities/activities.component';
+import { DateSwitcherComponent } from '../date-switcher/date-switcher.component';
 import { ActivityRowComponent } from '../activity-row/activity-row.component';
 
 @Component({

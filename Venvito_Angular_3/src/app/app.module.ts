@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartsModule } from 'ng2-charts';
 
 import
 {
@@ -53,6 +54,7 @@ import { DateSwitcherComponent } from './date-switcher/date-switcher.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityRowComponent } from './activity-row/activity-row.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardChartComponent } from './dashboard-chart/dashboard-chart.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DateSwitcherComponent,
     ActivitiesComponent,
     ActivityRowComponent,
-    DashboardComponent
+    DashboardComponent,
+    DashboardChartComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -71,6 +74,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
+    ChartsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'activities', pathMatch: 'full' },
       { path: 'activities', component: ActivitiesComponent },
