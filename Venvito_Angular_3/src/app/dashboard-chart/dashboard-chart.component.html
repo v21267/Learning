@@ -1,13 +1,29 @@
-<div>
-  <div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
+<div class="container w-100">
+  <div class="row  mt-2 mb-2 ml-2 mr-2">
+    <div class="col-8 chart-description pl-0">
+      {{ chart.description }}
+    </div>
+    <div class="col chart-total pr-0">
+      <span class="badge badge-primary total-badge" *ngIf="chart.type == 'AMOUNT'">
+        {{ chart.totalValue | currency:'USD':'symbol':'1.0-0' }}
+      </span>
+      <span class="badge badge-primary total-badge" *ngIf="chart.type == 'COUNT'">
+        {{ chart.totalValue }}
+      </span>
+    </div>
   </div>
-  <button (click)="randomize()">Update</button>
-</div>
+  <div class="row" style="display: block;">
+    <div class="col ml-2 chart-height" *ngIf="hasData">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              [colors]="barChartColors"
+              ></canvas>
+    </div>
+    <div class="col ml-2 chart-height no-data-parent" *ngIf="!hasData">
+      <div class="no-data-child">No data for this period</div>
+    </div>
+  </div>

@@ -68,6 +68,7 @@
     <None Include="MetricsDefinition_INSERT.sql" />
     <Build Include="usp_MetricsData_Get.sql" />
     <Build Include="usp_MetricsData_Update.sql" />
+    <Build Include="usp_MetricsChart_Get.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DB.refactorlog" />

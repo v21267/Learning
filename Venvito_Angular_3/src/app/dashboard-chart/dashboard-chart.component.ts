@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { MetricsChart } from '../metrics-chart';
+import { MetricsChartData } from '../metrics-chart-data';
 
 @Component({
   selector: 'app-dashboard-chart',
@@ -8,57 +11,116 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class DashboardChartComponent implements OnInit
 {
-  @Input() dateRange: string;
+  @Input() chart: MetricsChart;
 
-  constructor() { }
+  private barChartData: any[];
+  private barChartLabels: string[];
+  private barChartColors: any[];
+  private barChartType: string = 'bar';
+  private barChartLegend: boolean = false;
+
+  constructor(private decimalPipe: DecimalPipe) { }
 
   ngOnInit()
   {
+    this.setBarChartData();
+    this.setBarChartLabels();
+    this.setBarChartColors();
   }
 
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
+  public barChartOptions: any =
+    {
+      scales: {
+        xAxes: [{
+          barPercentage: 0.4,
+          gridLines: {
+            display: false
+          },
+          ticks: {
+            fontColor: "grey"
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            fontColor: "grey",
+            callback: (value, index, values) =>
+            {
+              return this.formatYAxisValue(this.chart, value);
+            }
+          },
+          gridLines: {
+            zeroLineColor: "grey"
+          }
+        }],
+      },
 
-  public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem, data) =>
+          {
+            let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
+            let label = this.decimalPipe.transform(value, '1.0-0'); // $12,345
+            return (this.chart.type == "AMOUNT" ? "$" : "") + label;
+          }
+        }
+      },
 
-  // events
-  public chartClicked(e: any): void
+      animation: false,
+      scaleShowVerticalLines: false,
+      responsive: true,
+    };
+
+  private setBarChartData()
   {
-    console.log(e);
+    let result = new Array();
+    for (let i = 0; i < this.chart.chartData.length; i++)
+    {
+      result.push(this.chart.chartData[i].value);
+    }
+
+    this.barChartData = [{ data: result }];
   }
 
-  public chartHovered(e: any): void
+  private setBarChartLabels()
   {
-    console.log(e);
+    let result = new Array();
+    for (let i = 0; i < this.chart.chartData.length; i++)
+    {
+      result.push(this.chart.chartData[i].periodName);
+    }
+
+    this.barChartLabels = result;
   }
 
-  public randomize(): void
+  private setBarChartColors()
   {
-    // Only Change 3 values
-    let data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    let clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
+    let barColor =
+      {
+        backgroundColor: this.chart.color
+      }
+    this.barChartColors = [barColor];
+  }
+
+  private get hasData(): boolean
+  {
+    for (let i = 0; i < this.chart.chartData.length; i++)
+    {
+      if (this.chart.chartData[i].value > 0) return true;
+    }
+    return false;
+  }
+
+  private formatYAxisValue(chart: MetricsChart, value: number): string
+  {
+    const suffix = ["", "k", "M", "G", "T", "P", "E"];
+    let index = 0;
+    let dvalue = value;
+    while ((value /= 1000) >= 1 && ++index) dvalue /= 1000;
+    let result =
+      (chart.type == "AMOUNT" ? "$" : "") +
+      Math.round(dvalue).toString() + suffix[index];
+    return result;
   }
 }
+

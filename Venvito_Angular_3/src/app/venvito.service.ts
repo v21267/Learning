@@ -63,10 +63,15 @@ export class VenvitoService
     return this.httpService.get(url);
   }
 
-
   updateMetricsData(data: MetricsData)
   {
     const url: string = '/api/MetricsData/';
     return this.httpService.post(url, data).subscribe();
+  }
+
+  getMetricsChart(dateRange: string)
+  {
+    const url: string = '/api/MetricsChart/' + dateRange;
+    return this.httpService.get(url);
   }
 }

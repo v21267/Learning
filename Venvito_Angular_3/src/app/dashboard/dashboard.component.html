@@ -22,6 +22,12 @@
     </li>
   </ul>
 
-  <app-dashboard-chart [dateRange]="dateRange" ></app-dashboard-chart>
+  <p *ngIf="!charts"><em>Loading...</em></p>
+
+  <div *ngIf="charts">
+    <div *ngFor="let chart of charts" class="chart-container">
+      <app-dashboard-chart [chart]="chart"></app-dashboard-chart>
+    </div>
+  </div>
 </div>
 
