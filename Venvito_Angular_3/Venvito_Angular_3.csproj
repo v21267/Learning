@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\app\metrics-chart-data.ts" />
+    <None Remove="src\app\metrics-chart.ts" />
     <None Remove="src\app\metrics-data.ts" />
     <None Remove="src\app\metrics-definition.ts" />
   </ItemGroup>
@@ -26,6 +28,8 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="src\app\metrics-data.ts" />
+    <TypeScriptCompile Include="src\app\metrics-chart-data.ts" />
+    <TypeScriptCompile Include="src\app\metrics-chart.ts" />
     <TypeScriptCompile Include="src\app\metrics-definition.ts" />
   </ItemGroup>
 </Project>
