@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Renderer2 } from '@angular/core';
 import { VenvitoService } from '../venvito.service';
 import { MetricsData } from '../metrics-data';
 
@@ -15,7 +15,7 @@ export class ActivityRowComponent implements OnInit
 
   @Input() data: MetricsData;
 
-  constructor(private venvitoService: VenvitoService) { }
+  constructor(private venvitoService: VenvitoService, private renderer: Renderer2) { }
 
   ngOnInit()
   {
@@ -33,6 +33,11 @@ export class ActivityRowComponent implements OnInit
   {
     this.originalAmount = this.data.value;
     this.inAmountEditing = true;
+
+    window.setTimeout(
+      () => { this.renderer.selectRootElement("#amount").focus(); },
+      500
+    );
   }
 
   setAmount()
