@@ -42,14 +42,18 @@ export class ActivityRowComponent implements OnInit
 
   setAmount()
   {
+    if (!this.isValidAmount) return;
+
     this.venvitoService.updateMetricsData(this.data);
     this.inAmountEditing = false;
+    console.log("setAmount()");
   }
 
   cancelAmountEditing()
   {
     this.data.value = this.originalAmount;
     this.inAmountEditing = false;
+    this.renderer.selectRootElement("#amount").value = this.originalAmount + "";
   }
 
   get isValidAmount(): boolean
